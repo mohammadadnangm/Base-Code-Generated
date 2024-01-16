@@ -15,7 +15,12 @@
         <ignore-route-errors value="true"/>
     </processing>
 
-    <max-num-vehicles value="100"/>
+    <!-- <time> -->
+        <!-- <begin value="0"/> Start time of the simulation -->
+        <!-- <end value="300"/> End time of the simulation (in seconds) -->
+    <!-- </time> -->
+
+    <max-num-vehicles value="100"/> <!-- Maximum number of vehicles to be used -->
 
     <routing>
         <device.rerouting.adaptation-steps value="18"/>
