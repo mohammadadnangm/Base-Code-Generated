@@ -254,3 +254,61 @@ vehicle_data.to_csv('vehicle_data.csv', index=False)
 
 
 
+
+
+# # Shadowing Scheme 
+# while vehicle.is_sending_LBS_request():
+#     surrounding_vehicles_locations = vehicle.collect_surrounding_vehicles_locations()
+#     min_deviation_vehicle = vehicle.select_vehicle_with_min_deviation(surrounding_vehicles_locations)
+    
+#     if vehicle.deviations_are_suitable(min_deviation_vehicle):
+#         shadows = vehicle.choose_shadows(min_deviation_vehicle)
+#         LBS_requests = vehicle.send_LBS_requests(shadows)
+#         responses = LBS_server.receive_responses(LBS_requests)
+#     else:
+#         LBS_request = vehicle.send_normal_LBS_request()
+#         response = LBS_server.receive_response(LBS_request)
+    
+#     pooled_requests = group_leader.pool_requests(LBS_requests)
+#     pooled_requests = group_leader.remove_vehicle_ids(pooled_requests)
+#     pooled_requests = group_leader.assign_random_id(pooled_requests)
+    
+#     LBS_server.send_service_message(pooled_requests)
+    
+#     useless_messages = vehicle.discard_useless_messages(responses)
+#     true_services = vehicle.use_true_services(useless_messages)
+
+
+# # Storing in Blockchain
+# # Start
+# transaction_protocol = TA.initiate_transaction_protocol()
+
+# # While check
+# while transaction_protocol.has_transactions_to_check():
+#     # Format of the transaction
+#     transaction_format_is_valid = transaction_protocol.check_transaction_format()
+    
+#     # History of the transaction
+#     transaction_history_is_valid = transaction_protocol.check_transaction_history()
+    
+#     if transaction_format_is_valid and transaction_history_is_valid:
+#         # If(Endorsing policy is true)
+#         if transaction_protocol.endorsing_policy_is_true():
+#             # Submit and update ledger
+#             transaction_protocol.submit_and_update_ledger()
+            
+#             # Create blocks→ Send message to TA
+#             blocks = transaction_protocol.create_blocks()
+#             TA.receive_message(blocks)
+            
+#             # Group Leader updates the ledger
+#             group_leader.update_ledger()
+#         else:
+#             # Do not update the ledger
+#             pass
+#     else:
+#         # Drop the transaction
+#         transaction_protocol.drop_transaction()
+
+# # End
+
