@@ -2,12 +2,11 @@ import random
 import pandas as pd
 import math
 import time
+from blockchain import Block, Blockchain
 
 # Read the CSV file
 vehicle_data = pd.read_csv('vehicle_data.csv')
-
-
-
+    
 
 def get_surrounding_vehicles(vehicle_id):
     # Get the cell ID for the vehicle
@@ -20,8 +19,6 @@ def get_surrounding_vehicles(vehicle_id):
     cell_vehicles = cell_vehicles[cell_vehicles != vehicle_id]
 
     return cell_vehicles
-
-
 
 
 def get_position(vehicle_id):
@@ -47,8 +44,6 @@ def select_vehicle_with_min_deviation(deviations):
     return min_deviation_vehicle
 
 
-
-
 def send_lbs_request(vehicle_id, message, timestamp, server_info):
     # Simulate sending a LBS request
     request = {
@@ -59,6 +54,7 @@ def send_lbs_request(vehicle_id, message, timestamp, server_info):
     }
     print(f"Sending request from vehicle {request['vehicle_id']} to server...")
     return request
+
 
 def receive_lbs_response(request):
     # Simulate receiving a LBS response
@@ -73,8 +69,6 @@ def receive_lbs_response(request):
     return response
 
 
-
-
 def filter_messages_based_on_location(vehicle_id, messages):
     # Get the vehicle's location
     vehicle_location = get_position(vehicle_id)
@@ -84,15 +78,16 @@ def filter_messages_based_on_location(vehicle_id, messages):
 
     return filtered_messages
 
+
 def is_relevant(message, location):
     # Check if the message's location is the same as the given location
     return message['location'] == location
 
 
-
-
-
 def main():
+    # Create a new Blockchain object
+    blockchain = Blockchain()
+
     # Choose a vehicle to test the functions
     test_vehicle_id = vehicle_data['vehicle_id'].values[0]
 
@@ -117,21 +112,20 @@ def main():
     response = receive_lbs_response(request)
     print(f"Response to request from {test_vehicle_id}: {response}")
 
+    # Create a new block with the request and response data and add it to the blockchain
+    timestamp = time.time()
+    previous_block = blockchain.get_latest_block()
+    new_data = {'request': request, 'response': response}
+    new_hash = blockchain.calculate_hash(previous_block.index + 1, previous_block.hash, timestamp, new_data)
+    new_block = Block(previous_block.index + 1, previous_block.hash, timestamp, new_data, new_hash)
+    blockchain.add_block(new_block)
+
     # Test filter_messages_based_on_location and is_relevant
     # For this test, we'll use some dummy messages
     messages = [{'vehicle_id': v, 'location': get_position(v), 'content': 'Test message'} for v in surrounding_vehicles]
     filtered_messages = filter_messages_based_on_location(test_vehicle_id, messages)
     print(f"Messages relevant to {test_vehicle_id}: {filtered_messages}")
 
+
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-    
