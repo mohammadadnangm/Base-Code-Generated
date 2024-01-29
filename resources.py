@@ -14,9 +14,8 @@ unique_cell_ids = vehicle_data['cell_id'].unique()
 random_cell_id = random.choice(unique_cell_ids)
 
 
-
 # Function to evaluate resources
-def evaluate_resources(random_cell_id):
+def evaluate_resources(vehicle_data, random_cell_id):
     # Get the rows for the vehicles in the random cell from the DataFrame
     vehicle_rows = vehicle_data[vehicle_data['cell_id'] == random_cell_id]
 
@@ -42,6 +41,6 @@ def evaluate_resources(random_cell_id):
 
     return vehicle_data
 
-evaluate_resources(random_cell_id)
+evaluate_resources(vehicle_data, random_cell_id)
 
 

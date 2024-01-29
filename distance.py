@@ -14,9 +14,8 @@ unique_cell_ids = vehicle_data['cell_id'].unique()
 random_cell_id = random.choice(unique_cell_ids)
 
 
-
 # Function to calculate distance from the cell center
-def calculate_distance(random_cell_id, cell_size):
+def calculate_distance(vehicle_data, random_cell_id, cell_size):
     # Get the cell center and radius for the random cell ID
     cell_center, cell_radius = get_cell_data(random_cell_id, cell_size)
 
@@ -55,4 +54,4 @@ def get_cell_data(cell_id, cell_size):
 
     return cell_center, cell_radius
 
-calculate_distance(random_cell_id, cell_size=500)
+calculate_distance(vehicle_data, random_cell_id, cell_size=500)

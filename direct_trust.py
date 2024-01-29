@@ -15,7 +15,7 @@ random_cell_id = random.choice(unique_cell_ids)
 
 
 # Function to calculate direct trust
-def calculate_direct_trust(random_cell_id):
+def calculate_direct_trust(vehicle_data, random_cell_id):
     # Read the data from the CSV file
     vehicle_data = pd.read_csv('vehicle_data.csv')
 
@@ -52,5 +52,7 @@ def calculate_direct_trust(random_cell_id):
     # Save the updated DataFrame to a CSV file
     vehicle_data.to_csv('vehicle_data.csv', index=False)
 
-calculate_direct_trust(random_cell_id)
+    return vehicle_data
+
+calculate_direct_trust(vehicle_data, random_cell_id)
 

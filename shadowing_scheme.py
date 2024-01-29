@@ -120,6 +120,9 @@ def main():
     new_block = Block(previous_block.index + 1, previous_block.hash, timestamp, new_data, new_hash)
     blockchain.add_block(new_block)
 
+    # Print the entire blockchain
+    blockchain.print_blockchain()
+
     # Test filter_messages_based_on_location and is_relevant
     # For this test, we'll use some dummy messages
     messages = [{'vehicle_id': v, 'location': get_position(v), 'content': 'Test message'} for v in surrounding_vehicles]

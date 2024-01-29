@@ -14,9 +14,8 @@ unique_cell_ids = vehicle_data['cell_id'].unique()
 random_cell_id = random.choice(unique_cell_ids)
 
 
-
 # Function to calculate total trust
-def calculate_total_trust(random_cell_id, beta=0.7):
+def calculate_total_trust(vehicle_data, random_cell_id, beta=0.7):
     # Ensure beta is within the specified range
     if not 0.5 < beta < 1:
         raise ValueError("Beta must be between 0.5 and 1")
@@ -45,6 +44,6 @@ def calculate_total_trust(random_cell_id, beta=0.7):
     # Save the updated DataFrame to a CSV file
     vehicle_data.to_csv('vehicle_data.csv', index=False)
 
-calculate_total_trust(random_cell_id)
+calculate_total_trust(vehicle_data, random_cell_id)
 
 

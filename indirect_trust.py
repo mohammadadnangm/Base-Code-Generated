@@ -14,10 +14,8 @@ unique_cell_ids = vehicle_data['cell_id'].unique()
 random_cell_id = random.choice(unique_cell_ids)
 
 
-
-
 # Function to calculate indirect trust
-def calculate_indirect_trust(random_cell_id):
+def calculate_indirect_trust(vehicle_data, random_cell_id):
     # Read the data from the CSV file
     vehicle_data = pd.read_csv('vehicle_data.csv')
 
@@ -61,7 +59,7 @@ def get_neighbors_based_on_cell(vehicle_id):
     return cell_vehicles
 
 
-calculate_indirect_trust(random_cell_id)
+calculate_indirect_trust(vehicle_data, random_cell_id)
 
 
 
