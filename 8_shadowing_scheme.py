@@ -4,16 +4,17 @@ import math
 import time
 from blockchain import Block, Blockchain
 
-# Read the CSV file
-vehicle_data = pd.read_csv('vehicle_data.csv')
-    
+# Load the selected vehicle data
+vehicle_data = pd.read_csv('selected_vehicle_data.csv')
+
+# Read the selected cell ID from the DataFrame
+selected_cell_id = vehicle_data['cell_id'].unique()[0]
+
 
 def get_surrounding_vehicles(vehicle_id):
-    # Get the cell ID for the vehicle
-    cell_id = vehicle_data[vehicle_data['vehicle_id'] == vehicle_id]['cell_id'].values[0]
 
     # Get the list of vehicles in the same cell
-    cell_vehicles = vehicle_data[vehicle_data['cell_id'] == cell_id]['vehicle_id'].values
+    cell_vehicles = vehicle_data[vehicle_data['cell_id'] == selected_cell_id]['vehicle_id'].values
 
     # Remove the current vehicle from the list
     cell_vehicles = cell_vehicles[cell_vehicles != vehicle_id]

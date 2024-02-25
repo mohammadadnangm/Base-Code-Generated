@@ -1,23 +1,17 @@
 import pandas as pd
 import numpy as np
-import random
-import math
-import ast
 
-# Assuming the vehicle_data DataFrame is already loaded
-vehicle_data = pd.read_csv('vehicle_data.csv')
 
-# Get a list of unique cell IDs
-unique_cell_ids = vehicle_data['cell_id'].unique()
+# Load the selected vehicle data
+vehicle_data = pd.read_csv('selected_vehicle_data.csv')
 
-# Select a random cell ID
-random_cell_id = random.choice(unique_cell_ids)
-
+# Read the selected cell ID from the DataFrame
+selected_cell_id = vehicle_data['cell_id'].unique()[0]
 
 # Function to evaluate resources
-def evaluate_resources(vehicle_data, random_cell_id):
-    # Get the rows for the vehicles in the random cell from the DataFrame
-    vehicle_rows = vehicle_data[vehicle_data['cell_id'] == random_cell_id]
+def evaluate_resources(vehicle_data, selected_cell_id):
+    # Get the rows for the vehicles in the selected cell from the DataFrame
+    vehicle_rows = vehicle_data[vehicle_data['cell_id'] == selected_cell_id]
 
     # Define the weight factors for each component of the resources evaluation
     processing_power_weight = 0.5
@@ -37,10 +31,11 @@ def evaluate_resources(vehicle_data, random_cell_id):
         vehicle_data.loc[index, 'resources'] = resources
 
     # Save the updated DataFrame to a CSV file
-    vehicle_data.to_csv('vehicle_data.csv', index=False)
+    vehicle_data.to_csv('selected_vehicle_data.csv', index=False)
+
+    # Print the information
+    print(f"Resources of {len(vehicle_rows)} vehicles from cell ID {selected_cell_id} is calculated and saved into data.")
 
     return vehicle_data
 
-evaluate_resources(vehicle_data, random_cell_id)
-
-
+evaluate_resources(vehicle_data, selected_cell_id)
